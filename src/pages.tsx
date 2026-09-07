@@ -28,7 +28,7 @@ export function Home() {
           <div className="hero-shade" />
         </div>
         <div className="wrap hero-copy">
-          <p className="kicker">Grand Cayman service shop · mobile · towing</p>
+          <p className="kicker">Grand Cayman service shop · mobile · towing · tires</p>
           <h1 className="hero-lines">
             We Haul.
             <br />
