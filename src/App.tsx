@@ -13,6 +13,7 @@ import { DvdlPage } from './DvdlPage'
 import { EvPage } from './EvPage'
 import { TiresPage } from './TiresPage'
 import { TowingPage } from './TowingPage'
+import { features } from './site'
 
 export default function App() {
   return (
@@ -22,7 +23,7 @@ export default function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/services" element={<ServicesPage />} />
-            <Route path="/tires" element={<TiresPage />} />
+            <Route path="/tires" element={features.tires ? <TiresPage /> : <NotFoundPage />} />
             <Route path="/mobile" element={<MobilePage />} />
             <Route path="/towing" element={<TowingPage />} />
             <Route path="/book" element={<BookingPage />} />

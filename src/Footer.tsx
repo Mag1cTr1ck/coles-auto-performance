@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Logo } from './Logo'
-import { site, telHref, waHref } from './site'
+import { features, site, telHref, waHref } from './site'
 
 export function Footer() {
   return (
@@ -12,7 +12,7 @@ export function Footer() {
           </div>
           <p className="muted">
             Service shop, mobile mechanic, and 24/7 {site.towName} in Grand Cayman — diagnostics,
-            repairs, tires, and roadside help from Barnes Drive.
+            repairs{features.tires ? ', tires,' : ','} and roadside help from Barnes Drive.
           </p>
           <div className="hero-actions">
             <a className="btn btn-lime" href={telHref()}>
@@ -54,9 +54,11 @@ export function Footer() {
             <li>Grand Cayman</li>
             <li>Emergency roadside service</li>
             <li>Vehicle pickup & transport</li>
-            <li>
-              <Link to="/tires">Tire sales and fitting</Link>
-            </li>
+            {features.tires ? (
+              <li>
+                <Link to="/tires">Tire sales and fitting</Link>
+              </li>
+            ) : null}
             <li>Shop, mobile, and 24/7 tow</li>
           </ul>
         </div>

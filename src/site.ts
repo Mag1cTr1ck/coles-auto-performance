@@ -1,16 +1,16 @@
 export const site = {
   shopName: "Cole's Auto Performance Ltd",
   shopShort: "Cole's Auto",
-  brandTitle: "Cole's AUTO | MOBILE | TOWING | TIRES",
+  brandTitle: "Cole's AUTO | MOBILE | TOWING",
   shopKind: 'Service shop',
   towName: 'C-Haul Towing',
   tagline: 'Where performance meets reliability',
   phone: '+13459362653',
   phoneDisplay: '345-936-2653',
   whatsapp: '13459362653',
-  email: 'colesauto345@gmail.com',
-  website: 'https://www.performanceauto.ky/',
-  websiteDisplay: 'www.performanceauto.ky',
+  email: 'service@colesauto.ky',
+  website: 'https://colesauto.ky/',
+  websiteDisplay: 'colesauto.ky',
   instagram: 'https://instagram.com/colesautoky',
   instagramHandle: '@colesautoky',
   address: 'Barnes Drive, Propose Queens Jubilee City Limit (Study Area), George Town, Grand Cayman',
@@ -23,6 +23,11 @@ export const site = {
     ],
     tow: 'C-Haul Towing — 24/7 emergency dispatch',
   },
+} as const
+
+/** Flip to true to show tire sales and fitting on the public site. */
+export const features = {
+  tires: false,
 } as const
 
 export const pillars = [
@@ -462,6 +467,14 @@ export const values = [
     text: 'Stay reachable while the vehicle is in our care. You know the plan before work starts.',
   },
 ]
+
+export function publicServices() {
+  return features.tires ? services : services.filter((s) => s.id !== 'tires')
+}
+
+export function publicPillars() {
+  return features.tires ? pillars : pillars.filter((p) => p.id !== 'tires')
+}
 
 export function categoryLabel(category: 'shop' | 'mobile' | 'tow') {
   if (category === 'tow') return 'Towing'

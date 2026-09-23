@@ -1,13 +1,13 @@
 import { IconPhone, IconWhatsApp } from './icons'
 import { RequestModal } from './RequestModal'
 import { Seo } from './Seo'
-import { districts, site, telHref, waHref } from './site'
+import { districts, features, site, telHref, waHref } from './site'
 
 const onSite = [
   'Battery test and replacement',
   'Jump starts and no-start checks',
   'Flat tire change (if a spare is usable)',
-  'Advice on tire sales and shop fitting',
+  ...(features.tires ? ['Advice on tire sales and shop fitting'] : []),
   'Fluid top-up and inspection',
   'Brake and light safety checks',
   'Scan diagnostics and advice',

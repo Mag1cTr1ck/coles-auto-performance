@@ -3,12 +3,12 @@ import { Link, NavLink } from 'react-router-dom'
 import { IconClose, IconMenu, IconPhone } from './icons'
 import { Logo } from './Logo'
 import { useRequest } from './request'
-import { site, telHref } from './site'
+import { features, site, telHref } from './site'
 
 const links = [
   { to: '/', label: 'Home' },
   { to: '/services', label: 'Services' },
-  { to: '/tires', label: 'Tires' },
+  ...(features.tires ? [{ to: '/tires', label: 'Tires' }] : []),
   { to: '/mobile', label: 'Mobile' },
   { to: '/towing', label: 'Towing' },
   { to: '/about', label: 'About' },

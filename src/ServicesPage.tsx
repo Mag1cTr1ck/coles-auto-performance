@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ServiceIcon } from './icons'
 import { useRequest } from './request'
 import { Seo } from './Seo'
-import { categoryLabel, services } from './site'
+import { categoryLabel, features, publicServices } from './site'
 
 const filters = [
   { id: 'all', label: 'All' },
@@ -30,12 +30,18 @@ export function ServicesPage() {
   const { openRequest } = useRequest()
   const [filter, setFilter] = useState<(typeof filters)[number]['id']>('all')
 
+  const catalog = useMemo(() => publicServices(), [])
+  const pills = useMemo(
+    () => (features.tires ? filters : filters.filter((f) => f.id !== 'tires')),
+    [],
+  )
+
   const visible = useMemo(() => {
-    const active = filters.find((f) => f.id === filter)
-    if (!active || active.id === 'all' || !('match' in active)) return services
+    const active = pills.find((f) => f.id === filter)
+    if (!active || active.id === 'all' || !('match' in active)) return catalog
     const ids = active.match as readonly string[]
-    return services.filter((s) => ids.includes(s.id))
-  }, [filter])
+    return catalog.filter((s) => ids.includes(s.id))
+  }, [catalog, filter, pills])
 
   return (
     <>
@@ -47,11 +53,12 @@ export function ServicesPage() {
         <p className="kicker">Service shop</p>
         <h1>The work we do in the bay.</h1>
         <p className="lead">
-          Diagnostics, scheduled maintenance, brakes, A/C, tires, EV and hybrid work, and free DVDL
-          — plus pickup, mobile call-outs, and C-Haul tow-in. Filter the list, then book.
+          {features.tires
+            ? 'Diagnostics, scheduled maintenance, brakes, A/C, tires, EV and hybrid work, and free DVDL — plus pickup, mobile call-outs, and C-Haul tow-in. Filter the list, then book.'
+            : 'Diagnostics, scheduled maintenance, brakes, A/C, EV and hybrid work, and free DVDL — plus pickup, mobile call-outs, and C-Haul tow-in. Filter the list, then book.'}
         </p>
         <div className="filter-pills" role="tablist" aria-label="Service categories">
-          {filters.map((f) => (
+          {pills.map((f) => (
             <button
               key={f.id}
               type="button"

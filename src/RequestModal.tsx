@@ -1,7 +1,7 @@
 import { useMemo, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { IconClose } from './icons'
-import { mailHref, services, site, waHref } from './site'
+import { features, mailHref, publicServices, site, waHref } from './site'
 
 export type RequestPreset = {
   serviceId?: string
@@ -35,7 +35,7 @@ function nextRef() {
 }
 
 export function RequestModal({ preset, onClose, embedded }: Props) {
-  const initialService =
+  const requestedService =
     preset?.serviceId ??
     (preset?.category === 'tow'
       ? 'towing'
@@ -44,6 +44,8 @@ export function RequestModal({ preset, onClose, embedded }: Props) {
         : preset?.category === 'shop'
           ? 'diagnostics'
           : 'mobile-service')
+  const initialService =
+    !features.tires && requestedService === 'tires' ? 'diagnostics' : requestedService
 
   const [serviceId, setServiceId] = useState(initialService)
   const [date, setDate] = useState('')
@@ -62,14 +64,16 @@ export function RequestModal({ preset, onClose, embedded }: Props) {
   const [notes, setNotes] = useState('')
   const [done, setDone] = useState<string | null>(null)
 
+  const catalog = useMemo(() => publicServices(), [])
+
   const selected = useMemo(
-    () => services.find((s) => s.id === serviceId) ?? services[0],
-    [serviceId],
+    () => catalog.find((s) => s.id === serviceId) ?? catalog[0],
+    [catalog, serviceId],
   )
 
   function onServiceChange(id: string) {
     setServiceId(id)
-    const svc = services.find((s) => s.id === id)
+    const svc = catalog.find((s) => s.id === id)
     if (svc) setLocationType(svc.category)
   }
 
@@ -170,7 +174,7 @@ export function RequestModal({ preset, onClose, embedded }: Props) {
       <label>
         Service type
         <select value={serviceId} onChange={(e) => onServiceChange(e.target.value)} required>
-          {services.map((s) => (
+          {catalog.map((s) => (
             <option key={s.id} value={s.id}>
               {s.name}
             </option>
