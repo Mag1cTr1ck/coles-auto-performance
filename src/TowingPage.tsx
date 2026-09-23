@@ -10,7 +10,7 @@ export function TowingPage() {
     <>
       <Seo
         title="Towing"
-        description="C-Haul Towing — 24/7 Grand Cayman tow truck, accident recovery, jump starts, flat tire help, fuel delivery, and roadside assistance. Call now."
+        description="C-Haul Towing — 24/7 Grand Cayman tow truck, accident recovery, jump starts, fuel delivery, and roadside assistance. Call now."
       />
       <section className="hero compact">
         <div className="hero-media" aria-hidden>

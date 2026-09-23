@@ -6,7 +6,7 @@ import { districts, features, site, telHref, waHref } from './site'
 const onSite = [
   'Battery test and replacement',
   'Jump starts and no-start checks',
-  'Flat tire change (if a spare is usable)',
+  'Spare wheel change (if a spare is usable)',
   ...(features.tires ? ['Advice on tire sales and shop fitting'] : []),
   'Fluid top-up and inspection',
   'Brake and light safety checks',

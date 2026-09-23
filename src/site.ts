@@ -229,7 +229,9 @@ export const services = [
     id: 'roadside',
     category: 'tow' as const,
     name: 'Roadside assistance',
-    description: 'Flat tires, lockouts, jump starts, minor roadside help, and emergency support.',
+    description: features.tires
+      ? 'Flat tires, lockouts, jump starts, minor roadside help, and emergency support.'
+      : 'Lockouts, jump starts, minor roadside help, and emergency support.',
     time: '24/7 dispatch',
     price: 'Quoted',
     icon: 'tire',
@@ -289,7 +291,9 @@ export const dvdlChecks = [
   },
   {
     title: 'Mechanically safe',
-    text: 'Tires, suspension, lights, brakes, engine lights and performance, mirrors, seat belts, leaks, horn, exhaust, airbags (including Takata recalls), and anything else that affects roadworthiness.',
+    text: features.tires
+      ? 'Tires, suspension, lights, brakes, engine lights and performance, mirrors, seat belts, leaks, horn, exhaust, airbags (including Takata recalls), and anything else that affects roadworthiness.'
+      : 'Wheels, suspension, lights, brakes, engine lights and performance, mirrors, seat belts, leaks, horn, exhaust, airbags (including Takata recalls), and anything else that affects roadworthiness.',
   },
   {
     title: 'Repairs first',
@@ -304,7 +308,7 @@ export const dvdlChecks = [
 export const equipment = [
   'Factory scan tools (all makes)',
   'Scan tools for imported and specialist vehicles',
-  'Tire pressure sensor tools',
+  ...(features.tires ? ['Tire pressure sensor tools'] : []),
   'Proper measuring devices',
   'Full diagnostic equipment',
   '10,000 lb vehicle lifts',
@@ -366,7 +370,9 @@ export const towCards = [
   },
   {
     title: 'Roadside assistance',
-    text: 'Flat tires, lockouts, battery jump starts, minor roadside help, and emergency support.',
+    text: features.tires
+      ? 'Flat tires, lockouts, battery jump starts, minor roadside help, and emergency support.'
+      : 'Lockouts, battery jump starts, minor roadside help, and emergency support.',
     icon: 'tire' as const,
   },
   {
@@ -378,7 +384,7 @@ export const towCards = [
 
 export const roadsideList = [
   'Jump starts',
-  'Flat tire assistance',
+  ...(features.tires ? ['Flat tire assistance'] : ['Spare wheel change']),
   'Vehicle lockout support',
   'Tow-in for non-starts',
   'Emergency roadside recovery',
@@ -475,6 +481,22 @@ export function publicServices() {
 export function publicPillars() {
   return features.tires ? pillars : pillars.filter((p) => p.id !== 'tires')
 }
+
+export const publicCopy = {
+  howWeHelpTitle: features.tires ? 'Service. Tires. Mobile. Tow.' : 'Service. Mobile. Tow.',
+  howWeHelpLead: features.tires
+    ? 'Book the service shop, fit new tires, request pickup, or call for a tow. Same team, one number.'
+    : 'Book the service shop, request pickup, or call for a tow. Same team, one number.',
+  heroKicker: features.tires
+    ? 'Grand Cayman service shop · mobile · towing · tires'
+    : 'Grand Cayman service shop · mobile · towing',
+  heroLead: features.tires
+    ? 'From diagnostics and maintenance to mobile repairs, towing, and tires — Cole’s keeps Cayman moving.'
+    : 'From diagnostics and maintenance to mobile repairs and towing — Cole’s keeps Cayman moving.',
+  ourWorkTitle: features.tires
+    ? 'Shop, tires, mobile, and tow — in Cayman.'
+    : 'Shop, mobile, and tow — in Cayman.',
+} as const
 
 export function categoryLabel(category: 'shop' | 'mobile' | 'tow') {
   if (category === 'tow') return 'Towing'

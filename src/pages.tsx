@@ -5,6 +5,7 @@ import { Seo } from './Seo'
 import {
   districts,
   features,
+  publicCopy,
   publicPillars,
   roadsideList,
   telHref,
@@ -20,11 +21,7 @@ export function Home() {
   return (
     <>
       <Seo
-        description={
-          features.tires
-            ? "Cole's AUTO | MOBILE | TOWING | TIRES — Cayman service shop, mobile mechanic, tires, and 24/7 towing. Book or call 345-936-2653."
-            : "Cole's AUTO | MOBILE | TOWING — Cayman service shop, mobile mechanic, and 24/7 towing. Book or call 345-936-2653."
-        }
+        description="Cole's AUTO | MOBILE | TOWING — Cayman service shop, mobile mechanic, and 24/7 towing. Book or call 345-936-2653."
       />
 
       <section className="hero">
@@ -33,11 +30,7 @@ export function Home() {
           <div className="hero-shade" />
         </div>
         <div className="wrap hero-copy">
-          <p className="kicker">
-            {features.tires
-              ? 'Grand Cayman service shop · mobile · towing · tires'
-              : 'Grand Cayman service shop · mobile · towing'}
-          </p>
+          <p className="kicker">{publicCopy.heroKicker}</p>
           <h1 className="hero-lines">
             We Haul.
             <br />
@@ -48,9 +41,7 @@ export function Home() {
             <span>We Roll.</span>
           </h1>
           <p className="lead">
-            {features.tires
-              ? 'From diagnostics and maintenance to mobile repairs, towing, and tires — Cole’s keeps Cayman moving.'
-              : 'From diagnostics and maintenance to mobile repairs and towing — Cole’s keeps Cayman moving.'}
+            {publicCopy.heroLead}
           </p>
           <div className="hero-actions">
             <a className="btn btn-lime" href={telHref()}>
@@ -87,14 +78,8 @@ export function Home() {
       <section className="wrap section">
         <div className="section-head">
           <p className="kicker">How we help</p>
-          <h2 className="line-title">
-            {features.tires ? 'Service. Tires. Mobile. Tow.' : 'Service. Mobile. Tow.'}
-          </h2>
-          <p className="muted">
-            {features.tires
-              ? 'Book the service shop, fit new tires, request pickup, or call for a tow. Same team, one number.'
-              : 'Book the service shop, request pickup, or call for a tow. Same team, one number.'}
-          </p>
+          <h2 className="line-title">{publicCopy.howWeHelpTitle}</h2>
+          <p className="muted">{publicCopy.howWeHelpLead}</p>
         </div>
         <div className={features.tires ? 'card-grid two' : 'card-grid three'}>
           {publicPillars().map((p) => (
@@ -218,11 +203,7 @@ export function Home() {
       <section className="wrap section">
         <div className="section-head">
           <p className="kicker">Our work</p>
-          <h2>
-            {features.tires
-              ? 'Shop, tires, mobile, and tow — in Cayman.'
-              : 'Shop, mobile, and tow — in Cayman.'}
-          </h2>
+          <h2>{publicCopy.ourWorkTitle}</h2>
           <p className="muted">
             Pickups, recoveries, roadside calls, shop work, and customer vehicles across Grand
             Cayman.

@@ -12,7 +12,7 @@ export function Footer() {
           </div>
           <p className="muted">
             Service shop, mobile mechanic, and 24/7 {site.towName} in Grand Cayman — diagnostics,
-            repairs{features.tires ? ', tires,' : ','} and roadside help from Barnes Drive.
+            repairs, and roadside help from Barnes Drive.
           </p>
           <div className="hero-actions">
             <a className="btn btn-lime" href={telHref()}>

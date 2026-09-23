@@ -191,6 +191,12 @@ p {
   border-radius: 20px;
 }
 
+.logo-hide-bar {
+  object-fit: cover;
+  object-position: top center;
+  clip-path: inset(0 0 21% 0);
+}
+
 .nav-desktop {
   display: none;
   gap: 18px;
