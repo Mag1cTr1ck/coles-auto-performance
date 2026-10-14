@@ -2,8 +2,9 @@ import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { Footer } from './Footer'
 import { Header } from './Header'
+import { IconWhatsApp } from './icons'
 import { useRequest } from './request'
-import { site } from './site'
+import { waHref } from './site'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -30,8 +31,14 @@ export function Layout() {
       <button className="fab" type="button" onClick={() => openRequest()}>
         Tow / Mobile
       </button>
-      <a className="fab-call" href={`tel:${site.phone}`}>
-        Call
+      <a
+        className="fab-call"
+        href={waHref('Emergency. I will share my pin.')}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <IconWhatsApp className="icon" />
+        Emergency
       </a>
     </>
   )
