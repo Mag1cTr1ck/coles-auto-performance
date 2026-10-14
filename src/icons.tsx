@@ -187,6 +187,24 @@ export function IconClose({ className }: IconProps) {
   )
 }
 
+export function IconInstagram({ className }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
+      <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5" stroke="currentColor" strokeWidth="1.8" />
+      <circle cx="12" cy="12" r="4.1" stroke="currentColor" strokeWidth="1.8" />
+      <circle cx="17.15" cy="6.85" r="1.15" fill="currentColor" />
+    </svg>
+  )
+}
+
+export function IconFacebook({ className }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M14.2 8.2h2.8V4.6h-2.8c-2.6 0-4.4 1.7-4.4 4.5v2.1H7.2v3.6h2.6V22h3.8v-7.2h2.7l.7-3.6h-3.4V9.4c0-.7.4-1.2 1.6-1.2Z" />
+    </svg>
+  )
+}
+
 const map = {
   wrench: IconWrench,
   tow: IconTow,

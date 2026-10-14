@@ -3,25 +3,28 @@ import { Link } from 'react-router-dom'
 import { ServiceIcon } from './icons'
 import { useRequest } from './request'
 import { Seo } from './Seo'
-import { categoryLabel, features, publicServices } from './site'
+import { features, groupLabel, publicServices, serviceCatalogJsonLd } from './site'
 
 const filters = [
   { id: 'all', label: 'All' },
-  { id: 'diagnostics', label: 'Diagnostics', match: ['diagnostics', 'electrical', 'european', 'asian'] },
-  { id: 'maintenance', label: 'Maintenance', match: ['oil', 'complete-care'] },
-  { id: 'brakes', label: 'Brakes & A/C', match: ['brakes', 'ac'] },
-  { id: 'tires', label: 'Tires', match: ['tires'] },
-  { id: 'ev', label: 'EV & hybrid', match: ['ev-hybrid', 'ev-battery'] },
-  { id: 'dvdl', label: 'DVDL', match: ['dvdl'] },
-  { id: 'mobile', label: 'Mobile mechanic', match: ['mobile-service'] },
-  { id: 'pickup', label: 'Pickup', match: ['pickup'] },
-  { id: 'tow', label: 'Towing service', match: ['tow-in', 'towing', 'roadside'] },
+  { id: 'maintenance', label: 'Maintenance' },
+  { id: 'brakes', label: 'Brakes' },
+  { id: 'engine', label: 'Engine' },
+  { id: 'drivetrain', label: 'Drivetrain' },
+  { id: 'tires', label: 'Tires' },
+  { id: 'electrical', label: 'Electrical' },
+  { id: 'ac', label: 'A/C' },
+  { id: 'undercar', label: 'Undercar' },
+  { id: 'specialty', label: 'Specialty' },
+  { id: 'inspection', label: 'Inspection' },
+  { id: 'mobile', label: 'Mobile' },
+  { id: 'tow', label: 'Towing' },
 ] as const
 
 function detailLink(id: string) {
   if (id === 'tires') return { to: '/tires', label: 'Tire details' }
   if (id === 'dvdl') return { to: '/dvdl', label: 'DVDL checklist' }
-  if (id === 'ev-battery') return { to: '/ev-battery', label: 'EV battery pricing' }
+  if (id === 'ev-battery') return { to: '/ev-battery', label: 'EV battery details' }
   if (id === 'mobile-service') return { to: '/mobile', label: 'Mobile mechanic' }
   return null
 }
@@ -37,25 +40,24 @@ export function ServicesPage() {
   )
 
   const visible = useMemo(() => {
-    const active = pills.find((f) => f.id === filter)
-    if (!active || active.id === 'all' || !('match' in active)) return catalog
-    const ids = active.match as readonly string[]
-    return catalog.filter((s) => ids.includes(s.id))
-  }, [catalog, filter, pills])
+    if (filter === 'all') return catalog
+    return catalog.filter((s) => s.group === filter)
+  }, [catalog, filter])
 
   return (
     <>
       <Seo
-        title="Services"
-        description="Cole’s Auto is a service shop on Barnes Drive: diagnostics, maintenance, repairs, free DVDL, EV service, pickup to Spotts, and C-Haul towing."
+        title="Auto Repair, Mobile Mechanic & Towing in Grand Cayman"
+        description="Cole’s Auto on Barnes Drive, George Town: oil change, brakes, engine diagnostics, A/C, EV, DVDL inspection, mobile mechanic, and 24/7 C-Haul towing in Grand Cayman. Call 345-936-2653."
+        jsonLd={serviceCatalogJsonLd()}
       />
       <section className="page-hero wrap">
-        <p className="kicker">Service shop</p>
-        <h1>The work we do in the bay.</h1>
+        <p className="kicker">Grand Cayman mechanic</p>
+        <h1>Auto repair, mobile, and towing.</h1>
         <p className="lead">
           {features.tires
-            ? 'Diagnostics, scheduled maintenance, brakes, A/C, tires, EV and hybrid work, and free DVDL — plus pickup, mobile call-outs, and C-Haul tow-in. Filter the list, then book.'
-            : 'Diagnostics, scheduled maintenance, brakes, A/C, EV and hybrid work, and free DVDL — plus pickup, mobile call-outs, and C-Haul tow-in. Filter the list, then book.'}
+            ? 'Oil change, brakes, engine, drivetrain, tires, electrical, A/C, suspension, EV, DVDL inspection, mobile mechanic visits, and C-Haul towing — George Town shop on Barnes Drive. Filter the list, then book.'
+            : 'Oil change, brakes, engine, drivetrain, electrical, A/C, suspension, EV, DVDL inspection, mobile mechanic visits, and C-Haul towing — George Town shop on Barnes Drive. Filter the list, then book.'}
         </p>
         <div className="filter-pills" role="tablist" aria-label="Service categories">
           {pills.map((f) => (
@@ -82,7 +84,7 @@ export function ServicesPage() {
                   <ServiceIcon name={s.icon} className="icon" />
                 </span>
                 <div className="service-body">
-                  <p className="tiny">{categoryLabel(s.category)}</p>
+                  <p className="tiny">{groupLabel(s.group)}</p>
                   <h3>{s.name}</h3>
                   <p className="service-copy">{s.description}</p>
                   <p className="meta">
@@ -98,7 +100,7 @@ export function ServicesPage() {
                       {s.category === 'tow'
                         ? 'Request a Tow'
                         : s.category === 'mobile'
-                          ? 'Request Tow / Mobile'
+                          ? 'Request visit'
                           : 'Book service'}
                     </button>
                     {extra ? (
@@ -114,7 +116,7 @@ export function ServicesPage() {
         </div>
         <p className="fine">
           Prices in CI$. Diagnostics and EV work are quoted after inspection. DVDL inspection is
-          free. Night and emergency tow rates may apply.
+          free. After-hours tow rates may apply. We are a service shop — not a body or paint shop.
         </p>
         <Link className="btn btn-ghost" to="/book">
           Book service

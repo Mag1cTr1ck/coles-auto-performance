@@ -24,7 +24,7 @@ export function TowingPage() {
             <span> We haul.</span>
           </h1>
           <p className="lead">
-            Emergency towing, recovery, and roadside assistance across Grand Cayman. Damage-aware
+            24/7 towing, recovery, and roadside assistance across Grand Cayman. Damage-aware
             loading, clear communication, and a shop that can take the vehicle the same night.
           </p>
           <div className="hero-actions">
@@ -32,7 +32,7 @@ export function TowingPage() {
               <IconPhone className="icon icon-red" />
               Call Now
             </a>
-            <a className="btn btn-ghost" href={waHref('Emergency tow needed. I will share my pin.')}>
+            <a className="btn btn-ghost" href={waHref('Tow needed. I will share my pin.')}>
               <IconWhatsApp className="icon" />
               WhatsApp Us
             </a>
@@ -56,7 +56,7 @@ export function TowingPage() {
 
       <section className="wrap">
         <article className="lime-card">
-          <p className="kicker dark">24/7 emergency towing</p>
+          <p className="kicker dark">24/7 towing</p>
           <h2>Stranded? C-Haul is already moving.</h2>
           <ul className="checks">
             {roadsideList.map((item) => (

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Logo } from './Logo'
+import { SocialLinks } from './SocialLinks'
 import { features, site, telHref, waHref } from './site'
 
 export function Footer() {
@@ -22,6 +23,7 @@ export function Footer() {
               Book service
             </Link>
           </div>
+          <SocialLinks />
         </div>
 
         <div>
@@ -41,25 +43,58 @@ export function Footer() {
                 {site.websiteDisplay}
               </a>
             </li>
-            <li>
-              <Link to="/pay">Pay online</Link>
-            </li>
             <li>{site.address}</li>
           </ul>
         </div>
 
         <div>
-          <p className="kicker">Coverage</p>
+          <p className="kicker">Hours</p>
           <ul className="plain">
-            <li>Grand Cayman</li>
-            <li>Emergency roadside service</li>
-            <li>Vehicle pickup & transport</li>
+            {site.hours.shop.map((h) => (
+              <li key={h.days}>
+                <strong>{h.days}</strong>
+                <div>{h.time}</div>
+              </li>
+            ))}
+            <li>
+              <strong>{site.towName}</strong>
+              <div>24/7</div>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <p className="kicker">Menu</p>
+          <ul className="plain">
+            <li>
+              <Link to="/services">Our Services</Link>
+            </li>
+            <li>
+              <Link to="/dvdl">DVDL inspection</Link>
+            </li>
+            <li>
+              <Link to="/ev-battery">EV batteries</Link>
+            </li>
             {features.tires ? (
               <li>
-                <Link to="/tires">Tire sales and fitting</Link>
+                <Link to="/tires">Tires</Link>
               </li>
             ) : null}
-            <li>Shop, mobile, and 24/7 tow</li>
+            <li>
+              <Link to="/mobile">Mobile</Link>
+            </li>
+            <li>
+              <Link to="/towing">Towing</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/contact">Contact</Link>
+            </li>
+            <li>
+              <Link to="/book">Book</Link>
+            </li>
           </ul>
         </div>
       </div>

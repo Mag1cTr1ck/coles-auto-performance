@@ -4,9 +4,10 @@ import { site } from './site'
 type Props = {
   title?: string
   description: string
+  jsonLd?: Record<string, unknown>
 }
 
-export function Seo({ title, description }: Props) {
+export function Seo({ title, description, jsonLd }: Props) {
   const fullTitle = title ? `${title} | ${site.brandTitle}` : site.brandTitle
 
   useEffect(() => {
@@ -18,5 +19,9 @@ export function Seo({ title, description }: Props) {
     const ogDesc = document.querySelector('meta[property="og:description"]')
     if (ogDesc) ogDesc.setAttribute('content', description)
   }, [fullTitle, description])
-  return null
+
+  if (!jsonLd) return null
+  return (
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+  )
 }

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useRequest } from './request'
 import { Seo } from './Seo'
-import { evNotes, evPricing } from './site'
+import { evNotes } from './site'
 
 export function EvPage() {
   const { openRequest } = useRequest()
@@ -10,7 +10,7 @@ export function EvPage() {
     <>
       <Seo
         title="EV Battery"
-        description="Nissan LEAF, e-NV200, BMW i3, Mitsubishi PHEV, and Toyota hybrid battery upgrades in Grand Cayman. Assessment first. Guideline prices in CI$."
+        description="Nissan LEAF, e-NV200, BMW i3, Mitsubishi PHEV, and Toyota hybrid battery upgrades in Grand Cayman. Assessment first. Quoted after inspection."
       />
       <section className="page-hero wrap">
         <p className="kicker">EV & hybrid batteries</p>
@@ -31,26 +31,12 @@ export function EvPage() {
       </section>
 
       <section className="wrap section">
-        <div className="card-grid two">
-          {evPricing.map((pack) => (
-            <article key={pack.title} className="dark-card">
-              <h3>{pack.title}</h3>
-              {pack.lines.map((line) => (
-                <p key={line}>{line}</p>
-              ))}
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="wrap section">
         <article className="lime-card">
           <p className="kicker dark">Before we order a pack</p>
           <h2>The whole vehicle has to earn the battery.</h2>
           <p>
             We inspect mechanical, electrical, suspension, steering, brakes, cooling, and drivetrain
-            life before recommending a high-voltage job. Final pricing depends on year, chemistry,
-            shipping, programming, and any extra parts the system needs.
+            life before recommending a high-voltage job. The quote comes after that assessment.
           </p>
         </article>
       </section>

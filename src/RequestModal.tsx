@@ -1,11 +1,35 @@
 import { useMemo, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { IconClose } from './icons'
-import { features, mailHref, publicServices, site, waHref } from './site'
+import { groupLabel, mailHref, publicServices, site, waHref } from './site'
+import { modelsForMake, vehicleMakes } from './vehicles'
 
 export type RequestPreset = {
   serviceId?: string
   category?: 'shop' | 'mobile' | 'tow'
+}
+
+const defaultByNeed = {
+  shop: 'oil',
+  mobile: 'roadside',
+  tow: 'towing',
+} as const
+
+const bookingIds = {
+  tow: ['towing'],
+  mobile: ['roadside', 'jumpstart', 'lockout', 'flat-tire', 'fuel-delivery'],
+} as const
+
+function resolveInitial(preset?: RequestPreset) {
+  const list = publicServices()
+  const fromId = preset?.serviceId ? list.find((s) => s.id === preset.serviceId) : undefined
+  if (fromId) {
+    return { serviceId: fromId.id, locationType: fromId.category }
+  }
+  const cat = preset?.category ?? 'mobile'
+  const preferred = list.find((s) => s.id === defaultByNeed[cat])
+  const first = preferred ?? list.find((s) => s.category === cat) ?? list[0]
+  return { serviceId: first.id, locationType: first.category }
 }
 
 type Props = {
@@ -26,7 +50,7 @@ const times = [
   '16:00',
   '17:00',
   '18:00',
-  'ASAP / emergency',
+  'ASAP',
 ]
 
 function nextRef() {
@@ -35,28 +59,16 @@ function nextRef() {
 }
 
 export function RequestModal({ preset, onClose, embedded }: Props) {
-  const requestedService =
-    preset?.serviceId ??
-    (preset?.category === 'tow'
-      ? 'towing'
-      : preset?.category === 'mobile'
-        ? 'mobile-service'
-        : preset?.category === 'shop'
-          ? 'diagnostics'
-          : 'mobile-service')
-  const initialService =
-    !features.tires && requestedService === 'tires' ? 'diagnostics' : requestedService
-
-  const [serviceId, setServiceId] = useState(initialService)
+  const initial = resolveInitial(preset)
+  const [serviceId, setServiceId] = useState<string>(initial.serviceId)
   const [date, setDate] = useState('')
-  const [time, setTime] = useState('ASAP / emergency')
-  const [locationType, setLocationType] = useState<'shop' | 'mobile' | 'tow'>(
-    preset?.category ?? 'mobile',
-  )
+  const [time, setTime] = useState('ASAP')
+  const [locationType, setLocationType] = useState<'shop' | 'mobile' | 'tow'>(initial.locationType)
   const [address, setAddress] = useState('')
   const [year, setYear] = useState('')
   const [make, setMake] = useState('')
   const [model, setModel] = useState('')
+  const [customModel, setCustomModel] = useState('')
   const [plate, setPlate] = useState('')
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
@@ -65,31 +77,36 @@ export function RequestModal({ preset, onClose, embedded }: Props) {
   const [done, setDone] = useState<string | null>(null)
 
   const catalog = useMemo(() => publicServices(), [])
-
-  const selected = useMemo(
-    () => catalog.find((s) => s.id === serviceId) ?? catalog[0],
-    [catalog, serviceId],
-  )
-
-  function onServiceChange(id: string) {
-    setServiceId(id)
-    const svc = catalog.find((s) => s.id === id)
-    if (svc) setLocationType(svc.category)
-  }
+  const offered = useMemo(() => {
+    if (locationType === 'shop') return catalog.filter((s) => s.category === 'shop')
+    const ids: readonly string[] = bookingIds[locationType]
+    const list = ids
+      .map((id) => catalog.find((s) => s.id === id))
+      .filter((s): s is NonNullable<typeof s> => Boolean(s))
+    const extraId = preset?.serviceId
+    if (extraId && !ids.includes(extraId)) {
+      const extra = catalog.find((s) => s.id === extraId && s.category === locationType)
+      if (extra) return [extra, ...list]
+    }
+    return list
+  }, [catalog, locationType, preset?.serviceId])
+  const selected = offered.find((s) => s.id === serviceId) ?? offered[0] ?? catalog[0]
+  const groupOrder = [...new Set(offered.map((s) => s.group))]
+  const modelOptions = modelsForMake(make)
+  const needsCustomModel = make === 'Other' || model === 'Other'
+  const vehicleModel = needsCustomModel ? customModel : model
 
   function pickNeed(kind: 'tow' | 'mobile' | 'shop') {
-    if (kind === 'tow') {
-      setServiceId('towing')
-      setLocationType('tow')
-      return
-    }
-    if (kind === 'shop') {
-      setServiceId('diagnostics')
-      setLocationType('shop')
-      return
-    }
-    setServiceId('mobile-service')
-    setLocationType('mobile')
+    if (kind === locationType) return
+    setLocationType(kind)
+    const next = catalog.find((s) => s.id === defaultByNeed[kind])
+    if (next) setServiceId(next.id)
+  }
+
+  function onMakeChange(next: string) {
+    setMake(next)
+    setModel(next === 'Other' ? 'Other' : '')
+    setCustomModel('')
   }
 
   function submit(e: FormEvent) {
@@ -102,7 +119,7 @@ export function RequestModal({ preset, onClose, embedded }: Props) {
       `When: ${date || 'ASAP'} ${time}`,
       `Location type: ${locationType}`,
       address ? `Address / GPS: ${address}` : '',
-      `Vehicle: ${year} ${make} ${model} ${plate}`.trim(),
+      `Vehicle: ${year} ${make} ${vehicleModel} ${plate}`.trim(),
       `Name: ${name}`,
       `Phone: ${phone}`,
       email ? `Email: ${email}` : '',
@@ -112,14 +129,14 @@ export function RequestModal({ preset, onClose, embedded }: Props) {
     const booking = {
       ref,
       createdAt: new Date().toISOString(),
-      serviceId,
+      serviceId: selected.id,
       date,
       time,
       locationType,
       address,
       year,
       make,
-      model,
+      model: vehicleModel,
       plate,
       name,
       phone,
@@ -173,12 +190,24 @@ export function RequestModal({ preset, onClose, embedded }: Props) {
 
       <label>
         Service type
-        <select value={serviceId} onChange={(e) => onServiceChange(e.target.value)} required>
-          {catalog.map((s) => (
-            <option key={s.id} value={s.id}>
-              {s.name}
-            </option>
-          ))}
+        <select value={selected.id} onChange={(e) => setServiceId(e.target.value)} required>
+          {groupOrder.length > 1
+            ? groupOrder.map((g) => (
+                <optgroup key={g} label={groupLabel(g)}>
+                  {offered
+                    .filter((s) => s.group === g)
+                    .map((s) => (
+                      <option key={s.id} value={s.id}>
+                        {s.name}
+                      </option>
+                    ))}
+                </optgroup>
+              ))
+            : offered.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.name}
+                </option>
+              ))}
         </select>
       </label>
 
@@ -196,39 +225,6 @@ export function RequestModal({ preset, onClose, embedded }: Props) {
           </select>
         </label>
       </div>
-
-      <fieldset className="choice">
-        <legend>Shop or come to you</legend>
-        <div className="choice-picks">
-          <label className={locationType === 'shop' ? 'is-on' : undefined}>
-            <input
-              type="radio"
-              name="loc"
-              checked={locationType === 'shop'}
-              onChange={() => setLocationType('shop')}
-            />
-            Shop — Barnes Drive
-          </label>
-          <label className={locationType === 'mobile' ? 'is-on' : undefined}>
-            <input
-              type="radio"
-              name="loc"
-              checked={locationType === 'mobile'}
-              onChange={() => setLocationType('mobile')}
-            />
-            Mobile mechanic
-          </label>
-          <label className={locationType === 'tow' ? 'is-on' : undefined}>
-            <input
-              type="radio"
-              name="loc"
-              checked={locationType === 'tow'}
-              onChange={() => setLocationType('tow')}
-            />
-            Tow / roadside
-          </label>
-        </div>
-      </fieldset>
 
       {locationType !== 'shop' ? (
         <label>
@@ -249,13 +245,41 @@ export function RequestModal({ preset, onClose, embedded }: Props) {
         </label>
         <label>
           Make
-          <input value={make} onChange={(e) => setMake(e.target.value)} placeholder="Toyota" required />
+          <select value={make} onChange={(e) => onMakeChange(e.target.value)} required>
+            <option value="">Select make</option>
+            {vehicleMakes.map((m) => (
+              <option key={m} value={m}>
+                {m}
+              </option>
+            ))}
+          </select>
         </label>
       </div>
       <div className="form-row">
         <label>
           Model
-          <input value={model} onChange={(e) => setModel(e.target.value)} placeholder="Rav4" required />
+          {needsCustomModel ? (
+            <input
+              value={customModel}
+              onChange={(e) => setCustomModel(e.target.value)}
+              placeholder="Model"
+              required
+            />
+          ) : (
+            <select
+              value={model}
+              onChange={(e) => setModel(e.target.value)}
+              required
+              disabled={!make}
+            >
+              <option value="">{make ? 'Select model' : 'Select make first'}</option>
+              {modelOptions.map((m) => (
+                <option key={m} value={m}>
+                  {m}
+                </option>
+              ))}
+            </select>
+          )}
         </label>
         <label>
           Plate
@@ -291,7 +315,7 @@ export function RequestModal({ preset, onClose, embedded }: Props) {
         Send request
       </button>
       <p className="fine">
-        You will get a WhatsApp message and email draft with reference details. For emergencies, call{' '}
+        You will get a WhatsApp message and email draft with reference details. Or call{' '}
         {site.phoneDisplay} now.
       </p>
     </form>
@@ -335,7 +359,7 @@ export function RequestModal({ preset, onClose, embedded }: Props) {
         <p className="kicker">Book now</p>
         <h2>Request service</h2>
         <p className="muted">
-          Request a tow or a mobile call-out — or book the shop. We confirm by WhatsApp and email.
+          Pick shop, mobile, or tow, then the job. We confirm by WhatsApp and email.
         </p>
         {form}
       </div>
@@ -348,7 +372,7 @@ export function RequestModal({ preset, onClose, embedded }: Props) {
         <div className="modal-head">
           <div>
             <p className="kicker">Request</p>
-            <h2 id="req-title">Tow or mobile call-out</h2>
+            <h2 id="req-title">Request service</h2>
           </div>
           <button className="icon-btn" type="button" onClick={onClose} aria-label="Close">
             <IconClose className="icon" />

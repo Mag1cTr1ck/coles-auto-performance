@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { IconPhone, IconWhatsApp } from './icons'
 import { Seo } from './Seo'
+import { SocialLinks } from './SocialLinks'
 import { site, telHref, waHref } from './site'
 
 const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&t=&z=15&ie=UTF8&iwloc=&output=embed`
@@ -28,6 +29,7 @@ export function ContactPage() {
           <a className="btn btn-ghost" href={`mailto:${site.email}`}>
             Email
           </a>
+          <SocialLinks />
         </div>
       </section>
 
@@ -65,6 +67,22 @@ export function ContactPage() {
                 <div>
                   <a href={site.website} target="_blank" rel="noreferrer">
                     {site.websiteDisplay}
+                  </a>
+                </div>
+              </li>
+              <li>
+                Instagram
+                <div>
+                  <a href={site.instagram} target="_blank" rel="noreferrer">
+                    {site.instagramHandle}
+                  </a>
+                </div>
+              </li>
+              <li>
+                Facebook
+                <div>
+                  <a href={site.facebook} target="_blank" rel="noreferrer">
+                    Cole’s Auto on Facebook
                   </a>
                 </div>
               </li>

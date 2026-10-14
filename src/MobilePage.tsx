@@ -3,16 +3,40 @@ import { RequestModal } from './RequestModal'
 import { Seo } from './Seo'
 import { districts, features, site, telHref, waHref } from './site'
 
-const onSite = [
-  'Battery test and replacement',
-  'Jump starts and no-start checks',
-  'Spare wheel change (if a spare is usable)',
-  ...(features.tires ? ['Advice on tire sales and shop fitting'] : []),
-  'Fluid top-up and inspection',
-  'Brake and light safety checks',
-  'Scan diagnostics and advice',
-  'A/C performance check',
-  'Fleet walk-around inspections',
+const visitGroups = [
+  {
+    title: 'Get you moving',
+    items: [
+      'Jump starts',
+      'Battery test, charge, and replacement',
+      'No-start checks — if it will not crank, we tow in',
+      'Flat tire — spare change or a safe plug',
+      'Lockout assistance',
+      'Fuel delivery',
+      'Fuses, bulbs, and light failures',
+    ],
+  },
+  {
+    title: 'Diagnose on site',
+    items: [
+      'Scan diagnostics and warning-light readout',
+      'Charging-system and electrical checks',
+      'Overheating and cooling-system check',
+      'A/C performance check',
+      'Starter and alternator testing',
+    ],
+  },
+  {
+    title: 'Upkeep at your place',
+    items: [
+      'Fluid top-up — oil, coolant, brake, and washer',
+      'Brake visual inspection',
+      'Wipers and visible belt condition',
+      'Pre-trip and safety walk-around',
+      'Fleet inspections at the office or yard',
+      ...(features.tires ? ['Advice on tire sales and shop fitting'] : []),
+    ],
+  },
 ]
 
 const steps = [
@@ -38,14 +62,15 @@ export function MobilePage() {
     <>
       <Seo
         title="Mobile"
-        description="Mobile mechanic service across Grand Cayman. On-site repairs, diagnostics, and battery work. Book a visit or WhatsApp your location."
+        description="Mobile mechanic visits across Grand Cayman — jump starts, batteries, scan diagnostics, fluids, lights, and on-site checks. Book a visit or WhatsApp your location."
       />
       <section className="page-hero wrap">
         <p className="kicker">Mobile mechanic</p>
         <h1>We come to you.</h1>
         <p className="lead">
-          Courtesy pickup and delivery from Savannah to West Bay, as far as Spotts. Stay reachable
-          while the vehicle is in our care. If the car will not start, we send the truck.
+          A Cole’s tech comes to your home, office, hotel, or pin. We handle the jobs that do not
+          need a lift. Pickup still runs Savannah to West Bay, as far as Spotts. If the car will
+          not start, we send the truck.
         </p>
         <div className="hero-actions">
           <a className="btn btn-lime" href={telHref()}>
@@ -72,17 +97,26 @@ export function MobilePage() {
       </section>
 
       <section className="wrap section">
-        <div className="split-head">
-          <div>
-            <p className="kicker">On site</p>
-            <h2>What we can finish without a bay.</h2>
-          </div>
+        <div className="section-head">
+          <p className="kicker">Mobile mechanic visit</p>
+          <h2>What we do on site.</h2>
+          <p className="muted">
+            Common parts and test gear travel with the tech. Major mechanical work, alignment, and
+            anything that needs a lift goes to Barnes Drive.
+          </p>
         </div>
-        <ul className="checks light">
-          {onSite.map((item) => (
-            <li key={item}>{item}</li>
+        <div className="card-grid three">
+          {visitGroups.map((group) => (
+            <article key={group.title} className="dark-card">
+              <h3>{group.title}</h3>
+              <ul className="checks light">
+                {group.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </article>
           ))}
-        </ul>
+        </div>
       </section>
 
       <section className="wrap section">
@@ -100,7 +134,7 @@ export function MobilePage() {
       </section>
 
       <section className="wrap section">
-        <RequestModal embedded preset={{ category: 'mobile', serviceId: 'mobile-service' }} />
+        <RequestModal embedded preset={{ category: 'mobile' }} />
         <p className="fine">Shop fallback: {site.address}</p>
       </section>
     </>

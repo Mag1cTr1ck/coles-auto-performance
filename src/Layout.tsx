@@ -31,7 +31,7 @@ export function Layout() {
         Tow / Mobile
       </button>
       <a className="fab-call" href={`tel:${site.phone}`}>
-        Emergency
+        Call
       </a>
     </>
   )
