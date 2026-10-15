@@ -9,8 +9,8 @@ export function DvdlPage() {
   return (
     <>
       <Seo
-        title="DVDL Pre-service and Inspection"
-        description="Cole’s pre-services the car, then takes it to the DVDL inspection center in Grand Cayman. The center does the inspection. Book the pre-service and the trip."
+        title="DVDL Inspection and Licensing"
+        description="Cole’s pre-services the car, then takes it to the DVDL inspection center in Grand Cayman for inspection and licensing. Fees depend on vehicle type and whether you license for 1 or 3 years."
       />
       <section className="page-hero wrap">
         <p className="kicker">DVDL inspection checklist</p>
@@ -22,7 +22,7 @@ export function DvdlPage() {
         </p>
         <div className="hero-actions">
           <button className="btn btn-lime" type="button" onClick={() => openRequest({ serviceId: 'dvdl', category: 'shop' })}>
-            Book DVDL pre-service and inspection
+            Book DVDL inspection and licensing
           </button>
           <button
             className="btn btn-ghost"
@@ -82,7 +82,7 @@ export function DvdlPage() {
             type="button"
             onClick={() => openRequest({ serviceId: 'dvdl', category: 'shop' })}
           >
-            Book DVDL pre-service and inspection
+            Book DVDL inspection and licensing
           </button>
         </div>
         <p className="fine">
@@ -102,7 +102,7 @@ export function DvdlPage() {
                 type="button"
                 onClick={() => openRequest({ serviceId: 'dvdl', category: 'shop' })}
               >
-                Book DVDL pre-service and inspection
+                Book DVDL inspection and licensing
               </button>
               <Link className="btn btn-ghost-dark" to="/book?service=dvdl&type=shop">
                 Book online

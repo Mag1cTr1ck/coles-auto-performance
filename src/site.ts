@@ -495,9 +495,9 @@ export const services = [
     id: 'dvdl',
     category: 'shop' as const,
     group: 'inspection' as const,
-    name: 'DVDL pre-service and inspection',
+    name: 'DVDL inspection and licensing',
     description:
-      'We pre-service the car, then take it to the DVDL inspection center. Cole’s does not perform the inspection. The center inspection is free. Pre-service and the trip are quoted.',
+      'We pre-service the car, then take it to the DVDL inspection center for inspection and licensing. Fees depend on vehicle type and whether you license for 1 or 3 years.',
     time: 'Same-day when roads are dry',
     price: 'Quoted',
     icon: 'scan',
@@ -730,7 +730,7 @@ export const dvdlPrep = [
 export const dvdlChecks = [
   {
     title: 'Pre-service at the shop',
-    text: 'We go through the checklist at Barnes Drive and fix what would fail, before the car leaves for the center.',
+    text: 'We go through the checklist at our shop and fix what would fail, before the car leaves for the center.',
   },
   {
     title: 'Trip to the center',
@@ -750,7 +750,7 @@ export const dvdlChecks = [
   },
   {
     title: 'What you pay',
-    text: 'The inspection at the center is free. Pre-service and the trip are quoted. Pickup and delivery is charged unless it is part of other shop work.',
+    text: 'Fees depend on vehicle type and whether you license for 1 or 3 years.',
   },
 ]
 
@@ -916,7 +916,7 @@ export const values = [
   },
   {
     title: 'Local service',
-    text: 'Barnes Drive shop, pickup from Savannah to West Bay, and C-Haul for the rest of the island.',
+    text: 'Barnes Drive shop, pickup or C-Haul island wide.',
   },
   {
     title: 'Clear communication',

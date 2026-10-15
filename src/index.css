@@ -1290,6 +1290,21 @@ textarea {
   line-height: 1.55;
 }
 
+.fleet-note {
+  max-width: 62ch;
+  margin-top: 22px;
+  color: #c8c8c8;
+  line-height: 1.65;
+}
+
+.fleet-note p {
+  margin: 0;
+}
+
+.fleet-note p + p {
+  margin-top: 12px;
+}
+
 .confirm h2 {
   font-size: 2.2rem;
 }

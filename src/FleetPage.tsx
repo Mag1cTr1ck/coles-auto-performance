@@ -18,7 +18,7 @@ const steps = [
   {
     n: '03',
     title: 'Service on a plan',
-    text: 'Barnes Drive shop, weekday pickup, or a check at the office or yard. You hear the plan before work starts.',
+    text: 'Weekday pickup or on‑site checks, with a service plan that keeps your vehicles moving. You get the plan before we begin.',
   },
 ]
 
@@ -34,7 +34,7 @@ const groups = [
   {
     title: 'Inspections',
     items: [
-      'We take vehicles to the DVDL inspection center. The center inspection is free.',
+      'DVDL inspection and licensing',
       'Safety and chassis walk-around',
       'A clear list of what is due before any repair',
     ],
@@ -62,15 +62,17 @@ export function FleetPage() {
     <>
       <Seo
         title="Fleet Service"
-        description="Fleet maintenance in Grand Cayman for company cars and light commercial vehicles. Scheduled service, inspections, and repairs at Barnes Drive, with pickup and on-site checks."
+        description="Fleet maintenance in Grand Cayman for company cars and light commercial vehicles. Scheduled service, inspections, repairs, and pickup — built around keeping vehicles on the road."
       />
       <section className="page-hero wrap">
         <p className="kicker">Fleet service</p>
-        <h1>Company vehicles, kept on the road.</h1>
+        <h1>Company vehicles, kept moving.</h1>
         <p className="lead">
-          Scheduled service, inspections, and repairs for company cars and light commercial fleets.
-          The shop is on Barnes Drive. Pickup runs Savannah to West Bay, as far as Spotts. Checks
-          can happen at the office or yard.
+          Scheduled service, inspections, and repairs for company cars and light commercial fleets —
+          all built around keeping your vehicles on the road and out of downtime.
+        </p>
+        <p className="lead">
+        Service, inspections, and repairs designed to keep your fleet in rotation and out of downtime. Weekday or weekend pickups and on‑site checks keep the vehicles where they need to be — working.
         </p>
         <div className="hero-actions">
           <a className="btn btn-lime" href={telHref()}>
@@ -104,7 +106,7 @@ export function FleetPage() {
           <img className="round-img" src="/media/fleet.jpg" alt="Company vehicles at Cole’s Auto" />
           <div>
             <p className="kicker">What a fleet booking covers</p>
-            <h2>The same shop. A schedule that fits the vehicles.</h2>
+            <h2>A tailored schedule that fits your business.</h2>
             <p>
               One team handles the service, the inspection, and the tow-in if a vehicle will not
               move. Weekdays 8:00 AM – 6:00 PM. Weekends by appointment. {site.towName} is 24/7.
@@ -137,12 +139,13 @@ export function FleetPage() {
             Towing
           </Link>
         </div>
-        <p className="fine price-note">
-          Company cars and light commercial vehicles. Quotes follow an assessment of the vehicle or
-          a review of the requested work. Diagnostic and inspection fees may apply. Prices are in
-          CI$. The DVDL inspection at the center is free. Pre-service and the trip are quoted. We
-          are a service shop — not a body or paint shop.
-        </p>
+        <div className="fleet-note">
+          <p>
+            We plan service around how your fleet is used — weekday pickup, office or yard checks,
+            and quick turnaround for vehicles that need to stay in rotation.
+          </p>
+          <p>Non-starts come in on C-Haul so the rest of the fleet keeps moving.</p>
+        </div>
       </section>
 
       <section className="wrap section">
