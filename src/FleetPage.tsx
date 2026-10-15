@@ -34,7 +34,7 @@ const groups = [
   {
     title: 'Inspections',
     items: [
-      'Free Cayman DVDL inspection',
+      'We take vehicles to the DVDL inspection center. The center inspection is free.',
       'Safety and chassis walk-around',
       'A clear list of what is due before any repair',
     ],
@@ -140,7 +140,8 @@ export function FleetPage() {
         <p className="fine price-note">
           Company cars and light commercial vehicles. Quotes follow an assessment of the vehicle or
           a review of the requested work. Diagnostic and inspection fees may apply. Prices are in
-          CI$. DVDL inspection is free. We are a service shop — not a body or paint shop.
+          CI$. The DVDL inspection at the center is free. Pre-service and the trip are quoted. We
+          are a service shop — not a body or paint shop.
         </p>
       </section>
 

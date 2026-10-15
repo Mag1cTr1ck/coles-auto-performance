@@ -121,7 +121,8 @@ export function ServicesPage() {
           and fair pricing, quotations and estimates are provided following an assessment of the
           vehicle or a review of the requested service. Please contact our team to discuss your
           service needs or arrange an assessment. Diagnostic and inspection fees may apply. Prices
-          are in CI$. DVDL inspection is free. After-hours tow rates may apply. We are a service
+          are in CI$. The DVDL inspection at the center is free. Pre-service and the trip are
+          quoted. After-hours tow rates may apply. We are a service
           shop — not a body or paint shop.
         </p>
         <Link className="btn btn-ghost" to="/book">

@@ -9,20 +9,20 @@ export function DvdlPage() {
   return (
     <>
       <Seo
-        title="DVDL Inspection Checklist"
-        description="Free Cayman DVDL inspection on Barnes Drive. Use this checklist for lights, tires, brakes, fluids, documents, and more — then book a routine service so you pass the first time."
+        title="DVDL Pre-service and Inspection"
+        description="Cole’s pre-services the car, then takes it to the DVDL inspection center in Grand Cayman. The center does the inspection. Book the pre-service and the trip."
       />
       <section className="page-hero wrap">
         <p className="kicker">DVDL inspection checklist</p>
         <h1>Make sure your vehicle passes the first time.</h1>
         <p className="lead">
-          A routine service before your DVDL inspection helps catch small issues before they become
-          expensive failures. Cole’s inspection is free. Use this checklist to confirm the vehicle
-          is ready — then bring the original logbook and valid insurance.
+          We service your vehicle, take it through the DVDL inspection, and return it ready to go.
+          This checklist shows what inspectors check on the day — just include the original logbook
+          and valid insurance when you drop off the car and we will take care of the rest.
         </p>
         <div className="hero-actions">
-          <button className="btn btn-lime" type="button" onClick={() => openRequest({ serviceId: 'dvdl' })}>
-            Book DVDL
+          <button className="btn btn-lime" type="button" onClick={() => openRequest({ serviceId: 'dvdl', category: 'shop' })}>
+            Book DVDL pre-service and inspection
           </button>
           <button
             className="btn btn-ghost"
@@ -60,8 +60,13 @@ export function DvdlPage() {
 
       <section className="wrap section">
         <div className="section-head">
-          <p className="kicker">Shop rules</p>
-          <h2>How we inspect at Barnes Drive.</h2>
+          <p className="kicker">DVDL inspection</p>
+          <h2>A service that gets your car inspected.</h2>
+          <p className="muted">
+            We pre-service the vehicle at Barnes Drive, take it through DVDL, and return it ready.
+            You skip the line; we handle the paperwork. Review this checklist to see what inspectors
+            check, and send the original logbook and valid insurance with the car.
+          </p>
         </div>
         <div className="card-grid two">
           {dvdlChecks.map((item) => (
@@ -71,26 +76,35 @@ export function DvdlPage() {
             </article>
           ))}
         </div>
+        <div className="hero-actions section-actions">
+          <button
+            className="btn btn-lime"
+            type="button"
+            onClick={() => openRequest({ serviceId: 'dvdl', category: 'shop' })}
+          >
+            Book DVDL pre-service and inspection
+          </button>
+        </div>
         <p className="fine">
-          Official tint rules are set by DVDL. We will not pass illegal tint. Shop: {site.address}.
+          Official tint rules are set by DVDL. Illegal tint fails at the center. Shop: {site.address}.
         </p>
       </section>
 
       <section className="wrap section">
         <article className="roadside-band">
           <div className="roadside-copy">
-            <p className="kicker dark">Get inspection-ready</p>
-            <h2>A quick routine service covers the list.</h2>
-            <p>Get inspection-ready with confidence. Book online at {site.websiteDisplay}.</p>
+            <p className="kicker dark">Book the trip</p>
+            <h2>Pre-service, then we take it to the center.</h2>
+            <p>We get the car ready, then take it to DVDL. Book online at {site.websiteDisplay}.</p>
             <div className="hero-actions">
               <button
                 className="btn btn-dark"
                 type="button"
-                onClick={() => openRequest({ serviceId: 'oil', category: 'shop' })}
+                onClick={() => openRequest({ serviceId: 'dvdl', category: 'shop' })}
               >
-                Book service
+                Book DVDL pre-service and inspection
               </button>
-              <Link className="btn btn-ghost-dark" to="/book">
+              <Link className="btn btn-ghost-dark" to="/book?service=dvdl&type=shop">
                 Book online
               </Link>
             </div>

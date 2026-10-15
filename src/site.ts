@@ -78,6 +78,17 @@ export const services = [
     icon: 'oil',
   },
   {
+    id: 'performance-tuning',
+    category: 'shop' as const,
+    group: 'engine' as const,
+    name: 'Performance tuning',
+    description:
+      'For drivers who want more out of their car — stronger mid-range pull, cleaner acceleration, and sharper throttle response. We refine ignition, airflow, fuel trims, and sensor strategy, then match plugs, coils, and filters to what the engine needs for better everyday performance. Proper tuning that brings out more of the car’s potential without guesswork maps or unsafe shortcuts.',
+    time: '1–3 hours',
+    price: 'Quoted by vehicle',
+    icon: 'scan',
+  },
+  {
     id: 'fluids',
     category: 'shop' as const,
     group: 'maintenance' as const,
@@ -484,11 +495,11 @@ export const services = [
     id: 'dvdl',
     category: 'shop' as const,
     group: 'inspection' as const,
-    name: 'DVDL / safety inspection',
+    name: 'DVDL pre-service and inspection',
     description:
-      'Free Cayman DVDL inspection. Original logbook and valid insurance required. Legal tint and dry roads for the brake test.',
+      'We pre-service the car, then take it to the DVDL inspection center. Cole’s does not perform the inspection. The center inspection is free. Pre-service and the trip are quoted.',
     time: 'Same-day when roads are dry',
-    price: 'Free',
+    price: 'Quoted',
     icon: 'scan',
   },
   {
@@ -638,7 +649,7 @@ export const dvdlChecklist = [
       'Rotors not warped or excessively thin',
       'No brake-fluid leaks',
       'Parking brake holds properly',
-      'Dry-road brake test — we reschedule if it rains',
+      'Dry-road brake test at the center — the trip waits if it rains',
     ],
   },
   {
@@ -718,28 +729,28 @@ export const dvdlPrep = [
 
 export const dvdlChecks = [
   {
-    title: 'Logbook',
-    text: 'Previously registered Cayman vehicles need the original DVDL logbook. First-time island vehicles need the inspection before a new logbook can be issued.',
+    title: 'Pre-service at the shop',
+    text: 'We go through the checklist at Barnes Drive and fix what would fail, before the car leaves for the center.',
   },
   {
-    title: 'Valid insurance',
-    text: 'Proof of current coverage with a policy number is required. This is a legal DVDL obligation.',
+    title: 'Trip to the center',
+    text: 'We take the car to the DVDL inspection center. The center does the inspection. We bring the car back.',
+  },
+  {
+    title: 'What goes with the car',
+    text: 'Original logbook and valid insurance, with a policy number. First-time island vehicles need the inspection before a new logbook can be issued.',
   },
   {
     title: 'Dry roads',
-    text: 'A brake-performance road test is part of the inspection. If it rains or roads are unsafe, we reschedule.',
+    text: 'The center’s brake test needs dry roads. If it rains or roads are unsafe, we reschedule the trip.',
   },
   {
-    title: 'Window tint',
-    text: 'Tint must meet DVDL limits. We cannot pass a vehicle with illegal tint.',
+    title: 'Tint and failed items',
+    text: 'Illegal tint fails at the center. If the center fails the car, those items are fixed, then we take it back. Cole’s does not issue the pass.',
   },
   {
-    title: 'Repairs first',
-    text: 'If it fails, every item must be corrected before a pass. Parts-on-order passes are no longer allowed.',
-  },
-  {
-    title: 'Fee',
-    text: 'The DVDL inspection is free. Pickup and delivery is charged unless combined with other shop service.',
+    title: 'What you pay',
+    text: 'The inspection at the center is free. Pre-service and the trip are quoted. Pickup and delivery is charged unless it is part of other shop work.',
   },
 ]
 

@@ -139,7 +139,6 @@ p {
 .lead,
 .muted {
   color: var(--muted);
-  max-width: 42rem;
 }
 
 .lead {
@@ -633,7 +632,6 @@ p {
 
 .roadside-copy p {
   color: #1a1a1a;
-  max-width: 36rem;
   margin-bottom: 18px;
 }
 
@@ -1289,7 +1287,6 @@ textarea {
 }
 
 .price-note {
-  max-width: 46rem;
   line-height: 1.55;
 }
 
