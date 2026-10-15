@@ -162,15 +162,6 @@ export function IconWhatsApp({ className }: IconProps) {
   )
 }
 
-export function IconCard({ className }: IconProps) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M3 10h18" stroke="currentColor" strokeWidth="1.8" />
-    </svg>
-  )
-}
-
 export function IconMenu({ className }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>

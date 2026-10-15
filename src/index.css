@@ -220,6 +220,34 @@ p {
   color: var(--lime);
 }
 
+.emergency-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 6px 12px;
+  background: #140404;
+  border-top: 1px solid #3a1212;
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.emergency-bar:hover {
+  color: #fff;
+  background: #1c0808;
+}
+
+.emergency-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 0 4px rgba(255, 45, 45, 0.22);
+}
+
 .nav-scrim {
   position: fixed;
   inset: 0;
@@ -236,7 +264,7 @@ p {
   background: #080808;
   border-bottom: 1px solid var(--line);
   padding: 20px 0 32px;
-  max-height: calc(100svh - var(--header));
+  max-height: calc(100svh - var(--header) - 34px);
   overflow: auto;
 }
 
@@ -776,12 +804,21 @@ p {
   margin: 0;
 }
 
-.mini-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin: 18px 0 22px;
+.review-stars {
+  color: var(--lime);
+  letter-spacing: 0.12em;
+  font-size: 1rem;
+  margin: 0 0 10px;
+}
+
+.review-quote {
+  font-size: 1.15rem;
+  margin: 0 0 14px;
+}
+
+.review-name {
   font-weight: 800;
+  margin: 0 0 4px;
 }
 
 .page-hero {
@@ -903,9 +940,9 @@ p {
 }
 
 .fab,
-.fab-call {
+.fab-wa {
   position: fixed;
-  z-index: 35;
+  z-index: 47;
   border: 0;
   border-radius: var(--pill);
   font-weight: 800;
@@ -921,14 +958,197 @@ p {
   cursor: pointer;
 }
 
-.fab-call {
+.fab-wa {
   left: 16px;
   bottom: 18px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--red);
-  color: #fff;
+  background: #25d366;
+  color: #06210f;
+  cursor: pointer;
+}
+
+.header-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: transparent;
+  color: #25d366;
+  font-weight: 800;
+  font-size: 0.92rem;
+  padding: 8px 6px;
+  cursor: pointer;
+}
+
+.header-wa:hover {
+  color: #7dffb0;
+}
+
+.wa-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 44;
+  border: 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+}
+
+.wa-panel {
+  position: fixed;
+  z-index: 46;
+  left: 16px;
+  bottom: 76px;
+  width: min(400px, calc(100% - 32px));
+  max-height: min(78svh, 640px);
+  overflow: auto;
+  background: #101010;
+  border: 1px solid #2a2a2a;
+  border-radius: 24px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+}
+
+.wa-profile,
+.wa-chat {
+  padding: 18px 18px 8px;
+}
+
+.wa-chat {
+  padding-bottom: 18px;
+  border-top: 1px solid #222;
+}
+
+.wa-profile-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.wa-profile h2 {
+  margin: 0 0 4px;
+  font-size: 1.6rem;
+}
+
+.wa-tag,
+.wa-location {
+  margin: 0 0 12px;
+  color: var(--muted);
+}
+
+.wa-label {
+  margin: 14px 0 6px;
+  color: var(--lime);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.wa-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.wa-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 6px;
+  font-size: 0.92rem;
+}
+
+.wa-list span {
+  color: var(--muted);
+  text-align: right;
+}
+
+.wa-services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.wa-services a {
+  display: inline-flex;
+  padding: 6px 10px;
+  border-radius: var(--pill);
+  background: #1c1c1c;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+.wa-profile .btn {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.wa-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 12px;
+}
+
+.wa-reply {
+  display: inline-flex;
+  padding: 8px 12px;
+  border-radius: var(--pill);
+  background: #1c1c1c;
+  border: 1px solid #2a2a2a;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+.wa-reply:hover {
+  border-color: #25d366;
+  color: #7dffb0;
+}
+
+.wa-compose-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.wa-chat textarea {
+  width: 100%;
+  margin: 0 0 10px;
+  resize: vertical;
+}
+
+.btn-wa {
+  background: #25d366;
+  color: #06210f;
+}
+
+.btn-wa:hover {
+  background: #7dffb0;
+}
+
+.wa-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: #1c1c1c;
+  color: var(--white);
+  cursor: pointer;
 }
 
 .modal-scrim {
@@ -1066,6 +1286,11 @@ textarea {
 .fine {
   color: #777;
   font-size: 0.82rem;
+}
+
+.price-note {
+  max-width: 46rem;
+  line-height: 1.55;
 }
 
 .confirm h2 {

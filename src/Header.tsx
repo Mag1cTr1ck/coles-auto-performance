@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { IconClose, IconMenu, IconPhone } from './icons'
+import { IconClose, IconMenu, IconPhone, IconWhatsApp } from './icons'
 import { Logo } from './Logo'
 import { useRequest } from './request'
 import { SocialLinks } from './SocialLinks'
 import { features, site, telHref, waHref } from './site'
+import { useWhatsAppDock } from './WhatsAppDock'
 
 const workLinks = [
   { to: '/services', label: 'Our Services' },
   { to: '/dvdl', label: 'DVDL inspection' },
   { to: '/ev-battery', label: 'EV batteries' },
+  { to: '/fleet', label: 'Fleet' },
   ...(features.tires ? [{ to: '/tires', label: 'Tires' }] : []),
   { to: '/mobile', label: 'Mobile' },
   { to: '/towing', label: 'Towing' },
@@ -19,11 +21,11 @@ const shopLinks = [
   { to: '/about', label: 'About' },
   { to: '/contact', label: 'Contact' },
   { to: '/book', label: 'Book' },
-  { to: '/pay', label: 'Pay online' },
 ]
 
 export function Header() {
   const { openRequest } = useRequest()
+  const { toggle, open } = useWhatsAppDock()
   const location = useLocation()
   const [menu, setMenu] = useState(false)
 
@@ -64,6 +66,16 @@ export function Header() {
               <span className="hide-sm">{site.phoneDisplay}</span>
               <span className="show-sm">Call</span>
             </a>
+            <button
+              className="header-wa"
+              type="button"
+              aria-label="WhatsApp"
+              aria-expanded={open}
+              onClick={toggle}
+            >
+              <IconWhatsApp className="icon" />
+              <span className="hide-sm">WhatsApp</span>
+            </button>
             <button className="btn btn-lime btn-sm btn-request" type="button" onClick={() => openRequest()}>
               <span className="hide-sm">Request Tow / Mobile</span>
               <span className="show-sm">Tow / Mobile</span>
@@ -80,6 +92,15 @@ export function Header() {
             </button>
           </div>
         </div>
+        <a
+          className="emergency-bar"
+          href={waHref('Emergency. I need help. I will share my pin.')}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span className="emergency-dot" aria-hidden />
+          24/7 emergency available
+        </a>
 
         {menu ? (
           <div className="nav-panel">

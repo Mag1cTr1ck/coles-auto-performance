@@ -75,6 +75,9 @@ export function Footer() {
             <li>
               <Link to="/ev-battery">EV batteries</Link>
             </li>
+            <li>
+              <Link to="/fleet">Fleet</Link>
+            </li>
             {features.tires ? (
               <li>
                 <Link to="/tires">Tires</Link>

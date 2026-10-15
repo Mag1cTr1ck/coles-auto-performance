@@ -1,4 +1,4 @@
-import { features } from './site'
+import { features, site } from './site'
 
 type Props = {
   className?: string
@@ -11,7 +11,7 @@ export function Logo({ className }: Props) {
     <img
       className={classes}
       src="/media/coles-logo.jpg?v=8"
-      alt="Cole's AUTO | MOBILE | TOWING"
+      alt={site.brandTitle}
     />
   )
 }

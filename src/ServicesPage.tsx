@@ -25,6 +25,7 @@ function detailLink(id: string) {
   if (id === 'tires') return { to: '/tires', label: 'Tire details' }
   if (id === 'dvdl') return { to: '/dvdl', label: 'DVDL checklist' }
   if (id === 'ev-battery') return { to: '/ev-battery', label: 'EV battery details' }
+  if (id === 'fleet') return { to: '/fleet', label: 'Fleet details' }
   if (id === 'mobile-service') return { to: '/mobile', label: 'Mobile mechanic' }
   return null
 }
@@ -114,9 +115,14 @@ export function ServicesPage() {
             )
           })}
         </div>
-        <p className="fine">
-          Prices in CI$. Diagnostics and EV work are quoted after inspection. DVDL inspection is
-          free. After-hours tow rates may apply. We are a service shop — not a body or paint shop.
+        <p className="fine price-note">
+          At Cole’s Auto, we understand that every vehicle is different. Our service pricing is
+          based on the vehicle’s make, model, condition, and the work required. To ensure accurate
+          and fair pricing, quotations and estimates are provided following an assessment of the
+          vehicle or a review of the requested service. Please contact our team to discuss your
+          service needs or arrange an assessment. Diagnostic and inspection fees may apply. Prices
+          are in CI$. DVDL inspection is free. After-hours tow rates may apply. We are a service
+          shop — not a body or paint shop.
         </p>
         <Link className="btn btn-ghost" to="/book">
           Book service

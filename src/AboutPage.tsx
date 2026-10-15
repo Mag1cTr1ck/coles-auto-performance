@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Seo } from './Seo'
 import { equipment, site, team } from './site'
 
@@ -30,6 +31,9 @@ export function AboutPage() {
               West Bay, as far as Spotts. Weekdays 8:00 AM – 6:00 PM; weekends by appointment.
             </p>
             <p>{site.address}</p>
+            <Link className="btn btn-ghost" to="/fleet">
+              Fleet service
+            </Link>
           </div>
         </div>
       </section>

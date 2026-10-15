@@ -1,7 +1,7 @@
 export const site = {
   shopName: "Cole's Auto Performance Ltd",
   shopShort: "Cole's Auto",
-  brandTitle: "Cole's AUTO | MOBILE | TOWING",
+  brandTitle: 'SERVICE | MOBILE | TOWING',
   shopKind: 'Service shop',
   towName: 'C-Haul Towing',
   tagline: 'Where performance meets reliability',
@@ -862,23 +862,24 @@ export const workShots = [
   },
 ]
 
-export const reviews = [
-  {
-    name: 'Andre W.',
-    area: 'West Bay',
-    text: 'Called C-Haul after a late breakdown on West Bay Road. Truck was there fast, loaded the car cleanly, and the Barnes Drive shop had it diagnosed the next morning.',
-  },
-  {
-    name: 'Melissa C.',
-    area: 'George Town',
-    text: 'Pickup from the office, honest quote, no runaround. This is how car service should work in Cayman.',
-  },
-  {
-    name: 'James P.',
-    area: 'Savannah',
-    text: 'Courtesy pickup as far as Spotts, then a real diagnostic — not a guess. They called before they spent a dollar.',
-  },
-]
+export const googleReviews = {
+  place: "Cole's Auto Performance Center",
+  rating: '5.0',
+  count: 2,
+  url: 'https://www.google.com/maps/place/Cole%27s+Auto+Performance+Center/@19.2959394,-81.3714925,17z/data=!4m6!3m5!1s0x8f25875564038385:0x48880e15a4bbfa3b!8m2!3d19.2959394!4d-81.3714925',
+  items: [
+    {
+      name: 'Mike Lewis',
+      stars: 5,
+      text: 'Excellent Service..!!',
+    },
+    {
+      name: 'Damion Thomas',
+      stars: 5,
+      text: '',
+    },
+  ],
+} as const
 
 export const districts = [
   'George Town',

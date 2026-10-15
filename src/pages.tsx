@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { IconCard, IconPhone, IconWhatsApp, ServiceIcon } from './icons'
+import { IconPhone, IconWhatsApp, ServiceIcon } from './icons'
 import { useRequest } from './request'
 import { Seo } from './Seo'
 import {
@@ -12,6 +12,7 @@ import {
   towCards,
   values,
   waHref,
+  googleReviews,
   workShots,
 } from './site'
 
@@ -21,7 +22,7 @@ export function Home() {
   return (
     <>
       <Seo
-        description="Cole's AUTO | MOBILE | TOWING — Cayman service shop, mobile mechanic, and 24/7 towing. Book or call 345-936-2653."
+        description="SERVICE | MOBILE | TOWING — Cayman service shop, mobile mechanic, and 24/7 towing. Book or call 345-936-2653."
       />
 
       <section className="hero">
@@ -52,10 +53,6 @@ export function Home() {
               <IconWhatsApp className="icon" />
               WhatsApp Us
             </a>
-            <Link className="btn btn-ghost" to="/pay">
-              <IconCard className="icon" />
-              Pay online
-            </Link>
           </div>
         </div>
       </section>
@@ -92,6 +89,33 @@ export function Home() {
               </Link>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="wrap section" id="fleet">
+        <div className="split">
+          <img className="round-img" src="/media/fleet.jpg" alt="Company vehicles serviced at Cole’s Auto" />
+          <div>
+            <p className="kicker">Fleet</p>
+            <h2>Fleet service for company vehicles.</h2>
+            <p>
+              Scheduled maintenance, inspections, and repairs for company cars and light commercial
+              fleets. Shop on Barnes Drive, pickup from Savannah to West Bay, or a check at the
+              office or yard.
+            </p>
+            <div className="hero-actions">
+              <Link className="btn btn-lime" to="/fleet">
+                Fleet service
+              </Link>
+              <button
+                className="btn btn-ghost"
+                type="button"
+                onClick={() => openRequest({ serviceId: 'fleet', category: 'shop' })}
+              >
+                Request fleet service
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -243,6 +267,35 @@ export function Home() {
         </div>
       </section>
 
+      <section className="wrap section" id="reviews">
+        <div className="section-head">
+          <p className="kicker">Google reviews</p>
+          <h2>{googleReviews.rating} on Google.</h2>
+          <p className="muted">
+            {googleReviews.place} — {googleReviews.count} reviews, both 5 stars.
+          </p>
+        </div>
+        <div className="card-grid two">
+          {googleReviews.items.map((review) => (
+            <article key={review.name} className="dark-card review-card">
+              <p className="review-stars" aria-label={`${review.stars} out of 5 stars`}>
+                {'★'.repeat(review.stars)}
+              </p>
+              {review.text ? (
+                <p className="review-quote">“{review.text}”</p>
+              ) : (
+                <p className="muted">5-star rating, no written comment.</p>
+              )}
+              <p className="review-name">{review.name}</p>
+              <p className="fine">Google review</p>
+            </article>
+          ))}
+        </div>
+        <a className="btn btn-ghost" href={googleReviews.url} target="_blank" rel="noreferrer">
+          Read on Google
+        </a>
+      </section>
+
       <section className="cayman-band">
         <video autoPlay muted loop playsInline poster="/media/cayman-water.jpg">
           <source src="/media/cayman-loop.mp4" type="video/mp4" />
@@ -263,26 +316,6 @@ export function Home() {
             Map & hours
           </Link>
         </div>
-      </section>
-
-      <section className="wrap section">
-        <div className="section-head">
-          <p className="kicker">Simple online payments</p>
-          <h2>Pay for shop, mobile, or towing online.</h2>
-          <p className="lead">
-            Request a secure payment link for an invoice or job reference. This site never stores
-            card details.
-          </p>
-        </div>
-        <div className="mini-grid">
-          <span>Credit / Debit Card</span>
-          <span>Secure Payment Link</span>
-          <span>Invoice Payment</span>
-          <span>Mobile Friendly</span>
-        </div>
-        <Link className="btn btn-lime" to="/pay">
-          Pay online
-        </Link>
       </section>
 
       <section className="wrap section cta-end">

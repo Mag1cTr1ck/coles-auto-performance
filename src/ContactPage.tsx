@@ -87,11 +87,9 @@ export function ContactPage() {
                 </div>
               </li>
               <li>
-                Book or pay
+                Book
                 <div>
                   <Link to="/book">Book service</Link>
-                  {' · '}
-                  <Link to="/pay">Pay online</Link>
                 </div>
               </li>
             </ul>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { IconPhone, IconWhatsApp } from './icons'
 import { RequestModal } from './RequestModal'
 import { Seo } from './Seo'
@@ -116,6 +117,11 @@ export function MobilePage() {
               </ul>
             </article>
           ))}
+        </div>
+        <div className="hero-actions section-actions">
+          <Link className="btn btn-ghost" to="/fleet">
+            Fleet service
+          </Link>
         </div>
       </section>
 
